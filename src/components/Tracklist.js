@@ -35,11 +35,14 @@ class Track extends PureComponent {
                         <div className="track-name-wrapper ellipsis-one-line tracklist-top-align">
                             <span className="tracklist-name">{ name }</span>
                             <span className="artists-album ellipsis-one-line">
-                                { artists.map(artist => <ArtistByLine {...artist}></ArtistByLine>) }
+                                {
+                                    artists.map((artist, i) => (
+                                        <ArtistByLine {...artist} last={ i === artists.length - 1 }></ArtistByLine>)
+                                    )
+                                }
                                 <span className="artists-album-separator" aria-label="in album">
                                     •
                                 </span>
-
                                 { <AlbumByLine {...album}></AlbumByLine> }
                             </span>
                         </div>
@@ -70,7 +73,7 @@ class Track extends PureComponent {
                     <div className="tracklist-col tracklist-col-duration">
                         <div className="tracklist-duration tracklist-top-align">
                             <span>
-                                { moment().seconds(duration).format('hh:m:ss') }
+                                { formatDuration(duration) }
                             </span>
                         </div>
                     </div>
@@ -80,9 +83,13 @@ class Track extends PureComponent {
     }
 }
 
+const formatDuration = (durationSeconds) => {
+    return moment.utc(durationSeconds * 1000).format('m:ss');
+}
+
 class ArtistByLine extends PureComponent {
     render() {
-        const { id, name } = this.props;
+        const { id, name, last } = this.props;
         return (
             <span>
                 <span className="react-contextmenu-wrapper">
@@ -90,7 +97,7 @@ class ArtistByLine extends PureComponent {
                         { name }
                     </a>
                 </span>
-                ,&nbsp;
+                { last ? null : ', ' }
             </span>
         );
     }

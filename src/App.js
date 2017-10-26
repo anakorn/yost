@@ -44,7 +44,22 @@ class Playlist extends PureComponent {
                 name: 'Jim Bob Adventures!!',
             },
             isExplicit: false,
-            duration: 400
+            duration: 3600
+        }, {
+            name: 'Jim Bob Goes to Neverland',
+            artists: [{
+                id: '12345abcdef',
+                name: 'Jim Bob',
+            }, {
+                id: 'asdlkfjalsdfjas98d',
+                name: 'Jimi Hendrix',
+            }],
+            album: {
+                id: '098765ghijkl',
+                name: 'Jim Bob Adventures!!',
+            },
+            isExplicit: false,
+            duration: 3600
         }];
         return (
             <section className="content playlist contentSpacing">
